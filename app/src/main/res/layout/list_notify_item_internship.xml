@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="25dp">
+
+    <TextView
+
+
+        android:id="@+id/textVie1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/intern4"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+
+
+        android:id="@+id/textVie2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textVie1"
+        android:layout_below="@+id/textVie1"
+        android:text="@string/intern3"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        android:layout_alignLeft="@+id/textVie1"/>
+
+    <TextView
+        android:id="@+id/item_content_ship3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textVie2"
+        android:layout_below="@+id/textVie2"
+        android:lineSpacingExtra="1sp"
+        android:text="@string/intern2"
+        android:textColor="@android:color/black"
+        android:textStyle="italic"
+        android:layout_alignLeft="@+id/textVie2"/>
+
+    <TextView
+        android:id="@+id/textVie4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_content_ship3"
+        android:text="@string/intern"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        />
+
+    <TextView
+        android:id="@+id/item_content_internship"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textVie4"
+        android:text="TextView"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_content_internship"
+        android:text="@string/intern5"
+        android:textColor="@android:color/black"
+        />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView7"
+        android:text="                 iCog Labs apprenticeship program requires cumulative grade-point average 3.00 and above."
+        android:textColor="@android:color/holo_red_light"/>
+
+    <Button
+        android:id="@+id/buttonOfintern"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView11"
+        android:layout_marginBottom="72dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Apply here"
+        android:textColor="@android:color/holo_orange_dark"/>
+
+</RelativeLayout>

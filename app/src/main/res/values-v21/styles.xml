@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EditText.Login" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="colorAccent">@android:color/holo_green_dark</item>
+        <item name="android:colorControlNormal">@android:color/holo_blue_dark</item>
+        <item name="android:colorControlActivated">@android:color/holo_blue_dark</item>
+    </style>
+</resources>

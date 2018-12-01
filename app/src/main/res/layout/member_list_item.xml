@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="2dp"
+             android:orientation="vertical"
+             android:shrinkColumns="*">
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/listNum"
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:text="1"/>
+
+        <TextView
+            android:id="@+id/member_name"
+            android:layout_width="96dp"
+            android:layout_height="match_parent"
+
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:fontFamily="serif"
+            android:text="@string/member_name_txt"
+            android:textColor="#ffffff"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/member_department"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+
+            android:layout_alignBaseline="@+id/member_phone_no"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@+id/member_phone_no"
+            android:fontFamily="serif"
+            android:text="@string/member_dept_txt"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/member_phone_no"/>
+
+        <TextView
+            android:id="@+id/member_phone_no"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+
+            android:layout_alignBaseline="@+id/member_name"
+            android:layout_alignBottom="@+id/member_name"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@+id/member_name"
+            android:fontFamily="serif"
+            android:text="Email"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/member_name"/>
+
+        <TextView
+            android:id="@+id/member_authority"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+
+            android:layout_alignBaseline="@+id/member_department"
+            android:layout_alignParentEnd="false"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@+id/member_department"
+            android:fontFamily="serif"
+            android:text="Authority"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:layout_alignParentRight="false"
+            android:layout_toRightOf="@+id/member_department"/>
+    </TableRow>
+
+
+</TableLayout>

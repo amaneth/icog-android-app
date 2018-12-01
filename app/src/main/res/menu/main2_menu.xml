@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_directing_btn"
+        android:icon="@mipmap/action_home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/btn_latest_drawer"
+        android:icon="@mipmap/action_latest"
+        android:title="Latest news"/>
+    <item
+        android:id="@+id/btn_blog_drawer"
+        android:icon="@mipmap/action_blog"
+        android:title="Blog"/>
+    <item
+        android:id="@+id/btn_vacancy_drawer"
+        android:icon="@mipmap/action_vacancy"
+        android:title="Vacancy"/>
+    <item
+        android:id="@+id/btn_intern_drawer"
+        android:icon="@mipmap/action_internship"
+        android:title="Internship"/>
+    <item
+        android:id="@+id/goto_members_list"
+        android:icon="@mipmap/action_members"
+        android:title="Members"/>
+    <item
+        android:id="@+id/action_logout_btn"
+        android:icon="@mipmap/action_logout"
+        android:title="@string/logout_btn"/>
+    <item
+        android:id="@+id/action_exit"
+        android:icon="@mipmap/action_exit"
+        android:title="Exit"/>
+</menu>

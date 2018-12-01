@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:id="@+id/choice_frame"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:layout_gravity="center_vertical|center_horizontal"
+                                             android:layout_marginBottom="24dp"
+                                             android:layout_marginTop="16dp"
+                                             android:background="@android:color/background_light"
+                                             android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="a team of visionary software proffesionals"
+        android:textColor="#ff8800"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/head"
+        tools:layout_constraintLeft_creator="1"/>
+
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="iCog Labs"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintLeft_toLeftOf="@+id/makers_layout"
+        app:layout_constraintRight_toRightOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/acc_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toTopOf="@+id/die_layout"
+        app:layout_constraintLeft_toRightOf="@+id/makers_layout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:layout_constraintRight_creator="1">
+
+
+        <TextView
+            android:id="@+id/textViw3"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_margin="1dp"
+            android:background="#000000"
+            android:fontFamily="serif"
+            android:gravity="bottom|center_horizontal"
+            android:text="ACC"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayot3"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1"/>
+
+        <android.support.constraint.ConstraintLayout
+
+            android:id="@+id/relativeLayot3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginStart="1dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/textViw3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1">
+
+            <ImageView
+                android:id="@+id/acc_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:background="#ffffff"
+                android:src="@mipmap/action_acc2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/makers_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toTopOf="@+id/solvit_layout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/acc_layout"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_margin="1dp"
+            android:background="#000000"
+            android:fontFamily="serif"
+            android:gravity="bottom|center_horizontal"
+            android:text="Makers"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"/>
+
+        <android.support.constraint.ConstraintLayout
+
+            android:id="@+id/relativeLayout2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1">
+
+            <ImageView
+                android:id="@+id/makers_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#ffffff"
+                android:src="@mipmap/action_makers2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/solvit_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toTopOf="@+id/icoggers_layout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/die_layout"
+        app:layout_constraintTop_toBottomOf="@+id/makers_layout"
+        tools:layout_constraintLeft_creator="1">
+
+
+        <TextView
+            android:id="@+id/textVi4"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_margin="1dp"
+            android:background="#000000"
+            android:fontFamily="serif"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="SolveIt"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLaot4"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1"/>
+
+        <android.support.constraint.ConstraintLayout
+
+            android:id="@+id/relativeLaot4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginStart="1dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/textVi4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1">
+
+            <ImageView
+                android:id="@+id/solveit_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:layout_marginEnd="23dp"
+                android:layout_marginLeft="23dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginStart="23dp"
+                android:background="#ffffff"
+                android:src="@mipmap/action_solve2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/die_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/icogOrange"
+        app:layout_constraintBottom_toTopOf="@+id/icoggers_layout"
+        app:layout_constraintLeft_toRightOf="@+id/solvit_layout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acc_layout"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_editor_absoluteX="188dp"
+        tools:layout_editor_absoluteY="222dp">
+
+
+        <TextView
+            android:id="@+id/textVieww5"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_margin="1dp"
+            android:background="#000000"
+            android:fontFamily="serif"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="iCoggers forum"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutt5"
+            tools:layout_constraintTop_creator="1"/>
+
+        <android.support.constraint.ConstraintLayout
+
+            android:id="@+id/relativeLayoutt5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:background="#1D9141"
+            app:layout_constraintBottom_toTopOf="@+id/textVieww5"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/icoggers_btn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:background="#ffffff"
+                android:src="@mipmap/action_icog2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_constraintBottom_creator="1"
+                tools:layout_constraintLeft_creator="1"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintTop_creator="1"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/icoggers_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solvit_layout"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1">
+
+
+        <TextView
+            android:id="@+id/textViewg2"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/relativeLayoutg2"
+            android:layout_margin="1dp"
+            android:background="#000000"
+            android:fontFamily="serif"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Designed in Ethiopia"
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayoutg2"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1"/>
+
+        <LinearLayout
+
+            android:id="@+id/relativeLayoutg2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginStart="1dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/textViewg2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1">
+
+            <ImageView
+                android:id="@+id/die_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_gravity="center"
+                android:background="#ffffff"
+                android:maxHeight="8dp"
+                android:maxWidth="8dp"
+                android:scaleX="2.7"
+                android:scaleY="2"
+                android:src="@mipmap/action_die2"/>
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

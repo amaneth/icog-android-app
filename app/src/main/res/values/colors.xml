@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#0069c0</color>
+    <color name="colorAccent">#f44334</color>
+    <color name="whiteTransparentHalf">#00ffffff</color>
+    <color name="likebtnGray">#747474</color>
+    <color name="likeBtnAccent">#F44334</color>
+    <color name="grayColor">#2356</color>
+    <color name="icogGreen">#1D9141</color>
+    <color name="icogOrange">#ff8800</color>
+</resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/makers_check_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    tools:context="com.example.amankassahun.AdminChoice">
+
+    <CheckBox
+        android:id="@+id/admin_radio_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:text="Admin"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="36dp"/>
+
+    <CheckBox
+        android:id="@+id/makers_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/admin_radio_btn"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:text="Makers admin"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="192dp"/>
+
+    <CheckBox
+        android:id="@+id/acc_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/makers_admin"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:text="ACC admin"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="280dp"/>
+
+    <CheckBox
+        android:id="@+id/die_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/acc_admin"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:text="DIE admin"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="376dp"/>
+
+    <CheckBox
+        android:id="@+id/solveit_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/die_admin"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:text="SolveIt admin"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="108dp"/>
+
+    <CheckBox
+        android:id="@+id/icogger_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/solveit_admin"
+        android:text="Make him/her an iCogger"
+        android:visibility="invisible"/>
+
+
+</RelativeLayout>

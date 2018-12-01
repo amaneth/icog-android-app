@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "789720425326",
+    "firebase_url": "https://amank-b2e1e.firebaseio.com",
+    "project_id": "amank-b2e1e",
+    "storage_bucket": "amank-b2e1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789720425326:android:66396bbae44170b4",
+        "android_client_info": {
+          "package_name": "com.example.amankassahun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789720425326-gfm3b79496ge4t3mi9ek8kiraejbuh0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amankassahun",
+            "certificate_hash": "92298883283a568d33384b9a289994c441d937cc"
+          }
+        },
+        {
+          "client_id": "789720425326-7f8l43vhfmcoo4bpjvuv8ve5avm6u80c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL9LX4IICakMqTaY0iUQQErImPsCRpiOU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "789720425326-7f8l43vhfmcoo4bpjvuv8ve5avm6u80c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

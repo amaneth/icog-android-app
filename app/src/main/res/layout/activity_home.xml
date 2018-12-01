@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:id="@+id/gfg"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:orientation="vertical">
+
+    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                                            android:id="@+id/drawer_layouty"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_below="@+id/front_toolbar"
+                                            android:fitsSystemWindows="false">
+
+
+        <FrameLayout
+            android:id="@+id/front_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/front_bottom_nav"
+            android:layout_alignRight="@+id/front_toolbar"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/front_toolbar"
+            app:layout_constraintBottom_toTopOf="@+id/front_bottom_nav"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/front_toolbar"
+            app:layout_constraintVertical_bias="1.0"
+            >
+
+            <Button
+                android:id="@+id/hiruy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="what was before fixed?"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_viewy"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#1D9141"
+            android:fitsSystemWindows="true"
+            app:itemTextColor="#FFFFFF"
+            app:menu="@menu/main_menu"/>
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+<android.support.design.widget.BottomNavigationView
+        android:id="@+id/front_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:background="#1D9141"
+        app:itemIconTint="#ffffff"
+        app:itemTextColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_menu"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/front_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_orange_dark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:subtitleTextColor="#ffffff"
+        app:titleTextColor="#ffffff">
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+</RelativeLayout>
