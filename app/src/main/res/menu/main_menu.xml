@@ -16,6 +16,10 @@
         android:title="@string/open_notifications"
         />
     <item
+        android:id="@+id/action_competee"
+        android:title="SolveIt competition"
+        />
+    <item
         android:id="@+id/action_logout"
         android:title="Logout"
         app:showAsAction="never"/>

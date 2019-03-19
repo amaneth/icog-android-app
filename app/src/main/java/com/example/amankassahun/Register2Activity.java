@@ -1,6 +1,4 @@
 package com.example.amankassahun;
-
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
@@ -8,9 +6,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,16 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Register2Activity extends AppCompatActivity {
 private EditText reg_email_field;
@@ -41,9 +33,7 @@ private EditText reg_email_field;
     private TextInputLayout tilConf;
     private ProgressBar reg_progress;
     private FirebaseAuth mAuth;
-    private String email,name,dept;
-    private List<Members> members_list;
-    private boolean verified= false;
+    private String email;
     private FirebaseFirestore firebaseFirestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +50,6 @@ reg_email_field = (EditText) findViewById(R.id.reg_email);
         tilPass= findViewById(R.id.reg_password_error);
         tilConf= findViewById(R.id.reg_confirm_pass_error);
         reg_progress=(ProgressBar) findViewById(R.id.reg_progress);
-        members_list= new ArrayList<>();
 
         reg_email_field.getBackground().setColorFilter(ContextCompat.getColor(Register2Activity.this,R.color.icogGreen), PorterDuff.Mode.SRC_OUT);
         reg_pass_field.getBackground().setColorFilter(ContextCompat.getColor(Register2Activity.this,R.color.icogGreen), PorterDuff.Mode.SRC_ATOP);
@@ -88,6 +77,7 @@ reg_email_field = (EditText) findViewById(R.id.reg_email);
                                 if(task.isSuccessful()){
                                     final FirebaseUser currrentUser=mAuth.getCurrentUser();
                                     CheckIfEmailVerified(currrentUser);
+                                    startActivity(new Intent(Register2Activity.this,LoginActivity.class));
 
 
 
@@ -170,26 +160,6 @@ reg_email_field = (EditText) findViewById(R.id.reg_email);
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        FirebaseUser currrentUser=mAuth.getCurrentUser();
-
-
-
-
-    }
-
-    private void sendToMain() {
-        Intent mainIntent= new Intent(Register2Activity.this,DepartmentsActivity.class);
-        startActivity(mainIntent);
-        finish();
-    }
 }

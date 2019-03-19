@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,8 +40,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import id.zelory.compressor.Compressor;
 
@@ -63,6 +62,7 @@ public class SetupActivity extends AppCompatActivity {
     private static String NAME="nameofnewuser";
     private static String EMAIL="emailofuser";
     private static String DEPARTMENTSETUPI="departmentinsetupo";
+    List<String> authority;
      FirebaseFirestore firebaseFirestore;
     public static Intent newIntent(Context packageContext, String name,String email,String department){
         Intent intent = new Intent(packageContext,SetupActivity.class);
@@ -102,6 +102,9 @@ public class SetupActivity extends AppCompatActivity {
 
                String name =task.getResult().getString("name");
                 String image= task.getResult().getString("image");
+                       emaila=task.getResult().getString("email");
+                        departmenta=task.getResult().getString("department");
+                        authority= (List<String>) task.getResult().get("authority");
                         setupName.setText(name);
                         if(image!=null){
                         mainImageUri=Uri.parse(image);
@@ -134,7 +137,6 @@ public class SetupActivity extends AppCompatActivity {
                  user_id= firebaseAuth.getCurrentUser().getUid();
                     File newImagefile= new File(mainImageUri.getPath());
                     try {
-                        Log.d("newpost","compressing started");
                         compressedImageFile= new Compressor(SetupActivity.this)
                                 .setMaxHeight(100)
                                 .setMaxWidth(100)
@@ -147,7 +149,6 @@ public class SetupActivity extends AppCompatActivity {
                     compressedImageFile.compress(Bitmap.CompressFormat.JPEG,0,out);
                     imageUri=getImageUri(getApplicationContext(),compressedImageFile);
                     StorageReference image_path= storageReference.child("profile_images").child(user_id+".jpg");
-
                     image_path.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -208,7 +209,7 @@ public class SetupActivity extends AppCompatActivity {
 
         Uri download_uri;
         if(task!=null){
-        download_uri=task.getResult().getDownloadUrl();}
+            download_uri=task.getResult().getDownloadUrl();}
         else{
             download_uri=mainImageUri;
         }
@@ -230,8 +231,10 @@ public class SetupActivity extends AppCompatActivity {
         else{
             userMap.put("email","unknown");
         }
-
-        userMap.put("authority", Arrays.asList("x"));
+if(authority!=null){
+    userMap.put("authority", authority);
+}else{
+        userMap.put("authority", Arrays.asList("x"));}
         userMap.put("id",user_id);
         firebaseFirestore.collection("Users").document(user_id).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

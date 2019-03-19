@@ -1,27 +1,27 @@
 package com.example.amankassahun;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,8 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
-import java.util.List;
 import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -54,13 +54,14 @@ public class DepartmentsActivity extends AppCompatActivity {
     private String email;
     private String nameOfMember;
     private String dept;
-    private String departmentAdmin;
     private int itemid;
     private ImageView menuBtn;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private String image;
     private String name;
+    private Button competeBtn;
+
     public static Intent newIntent(Context packageContext, String department,int itemId,String email){
         Intent intent = new Intent(packageContext,DepartmentsActivity.class);
         intent.putExtra(DEPARTMENT,department);
@@ -74,12 +75,13 @@ public class DepartmentsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_departments);
-Log.d("kassahun","onCreate() called");
+
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         Intent serviceIntent= new Intent(DepartmentsActivity.this,BlogService.class);
         startService(serviceIntent);
         menuBtn=findViewById(R.id.open_menu_btn);
+        competeBtn = findViewById(R.id.compete_btn_s);
         mDrawerLayout= findViewById(R.id.drawer);
         mNavigationView= findViewById(R.id.nav_view_drawer);
         View headerView= mNavigationView.getHeaderView(0);
@@ -87,6 +89,7 @@ Log.d("kassahun","onCreate() called");
         profileSettingImage= headerView.findViewById(R.id.profile_settings_image);
         profileName=headerView.findViewById(R.id.profile_name);
         mainbottomNav = (BottomNavigationView) findViewById(R.id.up_navigation);
+
 
         // FRAGMENTS
         mDepartmentsFragment = new DepartmentsFragment();
@@ -97,15 +100,21 @@ Log.d("kassahun","onCreate() called");
             department=getIntent().getStringExtra(DEPARTMENT);
             email= getIntent().getStringExtra(EMAILINDEP);
             itemid=getIntent().getIntExtra(ITEMID,0);
+        if(itemid==2){
+          competeBtn.setVisibility(View.VISIBLE);
+        }
 String depata=QueryPreferences.getDept(DepartmentsActivity.this);
         replaceFragment(mDepartmentsFragment.newInstance(department,itemid));
             mainbottomNav.getMenu().getItem(itemid).setChecked(true);
             boolean babo=depata.equals("public")||depata.equals("publican");
-            Log.d("buff","depata= "+depata+babo);
-
+competeBtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(DepartmentsActivity.this,SolvitCompetationActivity.class));
+    }
+});
 
             if(babo){
-                Log.d("buff","excuted= "+depata);
             mainbottomNav.getMenu().removeItem(R.id.iCogger_up_menu);}
         mainbottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -114,26 +123,31 @@ String depata=QueryPreferences.getDept(DepartmentsActivity.this);
                     case R.id.makers_up_menu:
                         replaceFragment(mDepartmentsFragment.newInstance("Makers",0));
                         department="Makers";
+                        competeBtn.setVisibility(View.INVISIBLE);
                         itemid=0;
                         return true;
                     case R.id.acc_up_menu:
                         replaceFragment(mDepartmentsFragment.newInstance("ACC",1));
                         department="ACC";
+                        competeBtn.setVisibility(View.INVISIBLE);
                         itemid=1;
                         return true;
                     case R.id.solvit_up_menu:
                         replaceFragment(mDepartmentsFragment.newInstance("SolveIt",2));
                         department="SolveIt";
+                        competeBtn.setVisibility(View.VISIBLE);
                         itemid=2;
                         return  true;
                     case R.id.die_up_menu:
                         replaceFragment(mDepartmentsFragment.newInstance("Design in Ethiopia",3));
                         department="Design in Ethiopia";
+                        competeBtn.setVisibility(View.INVISIBLE);
                         itemid=3;
                         return true;
                     case R.id.iCogger_up_menu:
                         replaceFragment(mDepartmentsFragment.newInstance("icoggers",4));
                         department="icoggers";
+                        competeBtn.setVisibility(View.INVISIBLE);
                         itemid=4;
                         return true;
 
@@ -230,6 +244,10 @@ String depata=QueryPreferences.getDept(DepartmentsActivity.this);
                         mDrawerLayout.closeDrawers();
                             Exit();
                         return true;
+                    case R.id.action_competa:
+                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(DepartmentsActivity.this,SolvitCompetationActivity.class));
+                        return true;
 
                     default:
                         return false;
@@ -249,12 +267,10 @@ public void Exit(){
     protected void onStart() {
         super.onStart();
         FirebaseUser firebaseuser= FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("fireb",""+firebaseuser);
-        Log.d("fireb",""+QueryPreferences.getDept(DepartmentsActivity.this));
         boolean aman= QueryPreferences.getDept(DepartmentsActivity.this).equals("public");
         if(firebaseuser==null||aman)
-        {
-            sendToLogin();
+        { sendToLogin();
+
         } else {
             current_user_id= mAuth.getCurrentUser().getUid();
             firebaseFirestore.collection("Users").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -273,7 +289,6 @@ public void Exit(){
                             image= task.getResult().getString("image");
 
 
-                            Log.d("author","inside ="+authority);
                             if(image!=null){
                                 Glide.with(DepartmentsActivity.this).setDefaultRequestOptions(placeHolderRequest).load(image).into(profileSettingImage);
                                 profileName.setText(name);}
@@ -284,10 +299,40 @@ public void Exit(){
                     }
                     else {
                         String errorMessage= task.getException().getMessage();
-                        Toast.makeText(DepartmentsActivity.this,"Error "+errorMessage,Toast.LENGTH_LONG).show();}
-                }
+                        Toast.makeText(DepartmentsActivity.this,"Just a few seconds",Toast.LENGTH_LONG).show();
+                        //Log.d("aman",errorMessage);
+                        //Log.d("aman",""+errorMessage.equals("Failed to get document because the client is offline.")) ;
+                        if (errorMessage.equals("Failed to get document because the client is offline.")) {
+                           showDialogg();
+                        }
+                        }}
+
             });
         }
+
+    }
+    private void showDialogg(){
+       /* AlertDialog.Builder builder = new AlertDialog.Builder(DepartmentsActivity.this);
+        builder.setMessage("Check your internet connection please!, it may take a few seconds to listen it")
+                .setCancelable(false)
+                .setNeutralButton("Retry", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        replaceFragment(mDepartmentsFragment.newInstance("Makers",0));
+                        department="Makers";
+                        competeBtn.setVisibility(View.INVISIBLE);
+                        itemid=0;
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                }).show();*/
+        replaceFragment(mDepartmentsFragment.newInstance(department,itemid));
+
+        competeBtn.setVisibility(View.INVISIBLE);
+
 
     }
 

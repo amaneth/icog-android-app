@@ -1,7 +1,6 @@
 package com.example.amankassahun;
 
 import android.annotation.SuppressLint;
-import android.content.pm.LabeledIntent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

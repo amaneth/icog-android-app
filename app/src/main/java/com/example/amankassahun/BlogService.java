@@ -7,11 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.util.Log;
 
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.DocumentChange;
@@ -29,20 +27,12 @@ import java.io.IOException;
 
 public class BlogService extends IntentService {
     private static final String TAG = "BlogService";
-    private static String  bloPostId,title,desc,image_url,latestKey;
-    private static Boolean REALLY_SHOW_NOTIFICATION=false;
+    private static String  bloPostId,title,desc;
     private FirebaseFirestore firebaseFirestore;
-    private static String ANNOUNCE="announce";
-   public static String partitionn;
     public BlogService() {
         super(TAG);
     }
-    public static Intent newIntent2(Context context,String partition)
-    {
-        Intent serviceIntent= new Intent(context.getApplicationContext(),BlogService.class);
-serviceIntent.putExtra(ANNOUNCE,partition);
-        return  serviceIntent;
-    }
+
     public static Intent newIntent(Context context)
     {
         Intent serviceIntent= new Intent(context.getApplicationContext(),BlogService.class);

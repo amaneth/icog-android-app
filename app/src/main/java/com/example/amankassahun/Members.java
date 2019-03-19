@@ -1,5 +1,11 @@
 package com.example.amankassahun;
 
+import android.app.Application;
+
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
+
 /**
  * Created by Aman on 10/2/2018.
  */
@@ -9,7 +15,17 @@ public class Members {
     public Members(){
 
     }
+   /* public class MyApplication extends Application {
 
+
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            Fabric.with(this,new Crashlytics());
+
+        }
+    }*/
     public Members(String name, String email, String department) {
         this.name = name;
         this.email = email;

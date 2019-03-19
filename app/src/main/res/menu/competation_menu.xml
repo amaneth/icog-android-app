@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_btn_compete"
+        android:icon="@mipmap/action_home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/service_btn_compete"
+        android:icon="@mipmap/action_services"
+        android:title="Services"/>
+    <item
+        android:id="@+id/event_btn_compete"
+        android:icon="@mipmap/action_events"
+        android:title="Events"/>
+    <item
+        android:id="@+id/forum_btn_compete"
+        android:icon="@mipmap/action_forums"
+        android:title="Forums"/>
+    <item
+        android:id="@+id/news_btn_compete"
+        android:icon="@mipmap/action_latest"
+        android:title="News"/>
+    <item
+        android:id="@+id/sign_btn_compete"
+        android:icon="@mipmap/action_logout"
+        android:title="SignIn/SignUp"/>
+</menu>

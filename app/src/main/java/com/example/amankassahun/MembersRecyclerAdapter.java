@@ -6,13 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +22,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -149,11 +146,9 @@ public class MembersRecyclerAdapter extends RecyclerView.Adapter<MembersRecycler
             final CheckBox solveIt = checkBoxView.findViewById(R.id.solveit_admin);
             final CheckBox die = checkBoxView.findViewById(R.id.die_admin);
         final CheckBox icogger= checkBoxView.findViewById(R.id.icogger_check_box);
-        Log.d("kassahun","author= "+authority);
         for(String s:authority){
             switch (s){
                 case "main admin":
-                    Log.d("kassahun","author= "+"exc");
                     admincheckBox.setVisibility(View.VISIBLE);
                     acc.setVisibility(View.VISIBLE);
                     makers.setVisibility(View.VISIBLE);
@@ -174,7 +169,6 @@ public class MembersRecyclerAdapter extends RecyclerView.Adapter<MembersRecycler
                     die.setVisibility(View.VISIBLE);
                     break;
                 default:
-                    Log.d("kassahun","author= "+"def");
                     break;
 
             }
@@ -183,7 +177,6 @@ public class MembersRecyclerAdapter extends RecyclerView.Adapter<MembersRecycler
             icogger.setChecked(true);
         }
  for(String s:member_authority){
-     Log.d("kassahun","authority="+s+",");
      switch (s){
          case "main admin":
              admincheckBox.setChecked(true);
@@ -196,7 +189,6 @@ public class MembersRecyclerAdapter extends RecyclerView.Adapter<MembersRecycler
              acc.setChecked(true);
              break;
          case "makers admin":
-             Log.d("kassahun","authority="+"excuted");
              makers.setChecked(true);
              break;
          case "solvit admin":
@@ -297,7 +289,6 @@ public class MembersRecyclerAdapter extends RecyclerView.Adapter<MembersRecycler
             }
         });
 String message;
-        Log.d("kassahun","/"+user_id+"vs"+current_user_id);
         if(current_user_id.equals(user_id)){
             message="Demote yourself to admin";
         }
@@ -319,7 +310,6 @@ String message;
                                         Map<String,Object> updates= new HashMap<>();
 
 if(acc.isChecked()&&makers.isChecked()&&solveIt.isChecked()&&die.isChecked()){
-    Log.d("kassahun",authorityEdit.toString());
     if(!authorityEdit.contains("main admin")){
     authorityEdit.add("main admin");}
     authorityEdit.remove("solvit admin");

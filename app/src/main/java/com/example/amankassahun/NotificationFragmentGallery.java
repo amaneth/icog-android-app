@@ -2,6 +2,7 @@ package com.example.amankassahun;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -10,13 +11,11 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,8 +58,6 @@ import static android.content.Context.CONNECTIVITY_SERVICE;
  */
 
 public class NotificationFragmentGallery extends VisibleFragment {
-    private static final String TAG = "PhotoGalleryFragment";
-    private WebsiteFitcher mWebsiteFitcher;
     private RecyclerView mPhotoRecyclerView;
     VerticalRecyclerViewFastScroller fastScroller;
     private List<NotificationGallery> mItems = new ArrayList<>();
@@ -72,10 +69,8 @@ public class NotificationFragmentGallery extends VisibleFragment {
     private static String strTextUrl;
     private static boolean marginNeed;
     private static boolean forSearch=true;
-    private static final String EXTRA_URL_TO_THE_FRAGMENT =
-            "com.example.amankassahun.fragmenturi";
+    FirebaseAuth mAuth;
    private ProgressBar mProgressBar;
-    Handler responseHandlerOfWebsite = new Handler();
     Integer count=1;
     private FirebaseFirestore firebaseFirestore;
 
@@ -87,10 +82,9 @@ strTextUrl=urlRet;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-Log.d("hir",strTextUrl+"ff");
+
         setRetainInstance(true);
         setHasOptionsMenu(true);
-        Log.d("hopy","why1");
 
         PollService.setServiceAlarm(getActivity(), true);
         current_user=FirebaseAuth.getInstance().getCurrentUser();
@@ -100,15 +94,16 @@ Log.d("hir",strTextUrl+"ff");
         firebaseFirestore= FirebaseFirestore.getInstance();
 
 
-        Log.i(TAG, "Background thread started");
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.fragment_notification_gallery, container, false);
         RecyclerView.LayoutParams params=new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         Resources r= getActivity().getResources();
         int px;
+
         if(marginNeed){
        px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,96,r.getDisplayMetrics());}
         else {
@@ -126,7 +121,6 @@ Log.d("hir",strTextUrl+"ff");
 
         // Connect the scroller to the recycler (to let the recycler scroll the scroller's handle)
 
-        Log.d("ethiopia","habesha");
         count=1;
         updateItems();
         mPhotoRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -154,7 +148,6 @@ Log.d("hir",strTextUrl+"ff");
 
 
             if (mQuery == null) {
-                Log.d("ethiopia","xx"+strTextUrl);
                 return new WebsiteFitcher().fetchRecentPhotos(strTextUrl,getActivity());
             } else  {
                 return new WebsiteFitcher().searchPhotos(mQuery,strTextUrl);
@@ -171,7 +164,6 @@ Log.d("hir",strTextUrl+"ff");
 
             mItems = items;
             boolean smart= mItems==null||mItems.toString().equals("[]");
-            Log.d("smart","mItems= "+mItems+smart);
 
             if(!smart){
                 mProgressBar.setVisibility(View.INVISIBLE);
@@ -239,7 +231,6 @@ menuInflater.inflate(R.menu.main_menu3, menu);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Log.d(TAG, "QueryTextSubmit: " + s);
                 query=s;
                 forSearch=true;
                 updateItems();
@@ -247,7 +238,6 @@ menuInflater.inflate(R.menu.main_menu3, menu);
             }
             @Override
             public boolean onQueryTextChange(String s) {
-                Log.d(TAG, "QueryTextChange: " + s);
                 return false;
             }
         });
@@ -287,13 +277,18 @@ menuInflater.inflate(R.menu.main_menu3, menu);
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i(TAG, "Background thread destroyed");
     }
 
     private void setupAdapter() {
-        Log.d("smart","before is added");
-        if (isAdded()) {
-            Log.d("smart","inside is added"+mItems);
+        mAuth= FirebaseAuth.getInstance();
+        FirebaseUser firebaseuser= FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseuser==null&&mAuth!=null)
+        {
+            mAuth.signInWithEmailAndPassword("icog@gmail.com","password");
+
+
+        }
+        else if (isAdded()) {
             mPhotoRecyclerView.setAdapter(new NotificationAdapter(mItems));
         }
     }
@@ -338,9 +333,7 @@ menuInflater.inflate(R.menu.main_menu3, menu);
         }
 
         public void bindGalleryItem(final NotificationGallery item, int n) {
-Log.d("smart","gonna excute"+item);
             if(n==0) {
-                Log.d("smart","gonna excute"+n+n+n);
                 mItemImageView.setOnClickListener(this);
                 mTitleTextView.setText(item.toString());
                 mContentTextView.setText(item.getContent());
@@ -391,7 +384,6 @@ Log.d("smart","gonna excute"+item);
 
 
         public void bindDrawable(String drawable) {
-            Log.d("smart","image attached");
             if(isAdded()){
                 RequestOptions requestOptions= new RequestOptions();
                 requestOptions=requestOptions.placeholder(R.drawable.holder);
@@ -409,7 +401,6 @@ Log.d("smart","gonna excute"+item);
         }
         @Override
         public void onClick(View v) {
-            Log.d("tas","abaye");
             if(isAdded()){
             Intent i= PhotoPageActivity.newIntent(getActivity(),mNotificationGallery.getPhotoPageUri());
             startActivity(i);}
@@ -453,7 +444,6 @@ Log.d("smart","gonna excute"+item);
             NotificationGallery galleryItem = mGalleryItems.get(position);
             final String blogPostId= galleryItem.getId();
             int itemViewType=getItemViewType(position);
-            Log.d(TAG,"this ="+galleryItem.getUrl());
             if(itemViewType==normalView){
             holder.bindGalleryItem(galleryItem,0);}
             else if(itemViewType==texttOnlyView){
@@ -471,7 +461,6 @@ Log.d("smart","gonna excute"+item);
 
             Drawable placeholder = getResources().getDrawable(R.drawable.bill_up_close);
            // notificationHolder.bindDrawable(placeholder);
-            Log.d("hopy","wey aman"+galleryItem.getUrl());
             holder.bindDrawable(galleryItem.getUrl());
            // mThumbnailDownloader.queueThumbnail(notificationHolder, galleryItem.getUrl());
             if(isAdded()){
@@ -597,6 +586,18 @@ else {
 
       mPhotoRecyclerView.setAdapter(notificationAdapter);
         notificationAdapter.notifyDataSetChanged();
-        Log.d("abiy","onResume() called"+mItems.size());
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mAuth= FirebaseAuth.getInstance();
+        FirebaseUser firebaseuser= FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseuser==null&&mAuth!=null)
+        {
+            mAuth.signInWithEmailAndPassword("icog@gmail.com","password");
+
+
+        }
     }
 }

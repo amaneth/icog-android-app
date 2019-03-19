@@ -2,7 +2,8 @@ package com.example.amankassahun;
 
 import android.support.annotation.NonNull;
 
-import com.google.firebase.database.Exclude;
+import com.google.firebase.firestore.Exclude;
+
 
 /**
  * Created by Aman on 9/30/2018.

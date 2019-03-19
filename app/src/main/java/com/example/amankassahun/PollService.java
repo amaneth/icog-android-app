@@ -7,14 +7,12 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -38,12 +36,10 @@ public class PollService extends IntentService {
         return new Intent(context, PollService.class);
     }
     public static void setServiceAlarm(Context context, boolean isOn) {
-        Log.d("News","poll service");
         Intent i = PollService.newIntent(context);
         PendingIntent pi = PendingIntent.getService(context, 0, i, 0);
         AlarmManager alarmManager = (AlarmManager)
                 context.getSystemService(Context.ALARM_SERVICE);
-        Log.d("News","before setting alarm");
         if (isOn) {
             alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME,
                     SystemClock.elapsedRealtime(), POLL_INTERVAL_MS, pi);
@@ -52,7 +48,6 @@ public class PollService extends IntentService {
             pi.cancel();
         }
         QueryPreferences.setAlarmOn(context, isOn);
-        Log.d("News","after alarm finished");
     }
     public static boolean isServiceAlarmOn(Context context) {
         Intent i = PollService.newIntent(context);
@@ -65,7 +60,6 @@ public class PollService extends IntentService {
     }
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.d("News","onHandleIntent");
         if (!isNetworkAvailableAndConnected()) {
             return;
         }
@@ -80,8 +74,6 @@ public class PollService extends IntentService {
         String resultId = items.get(0).getId();
 
         if (!resultId.equals(lastResultId)) {
-            Log.i(TAG, "Got an old result: " + resultId+latestUrl);
-            Resources resources = getResources();
             Intent i = NotifyActivity.newIntent(this,latestUrl);
            //Uri uri= Uri.parse("http://www.uog.edu.et/wp-content/uploads/2013/03/biniam.mp3");
             PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
@@ -105,9 +97,6 @@ public class PollService extends IntentService {
                     .build();
 
             showBackgroundNotification(0, notification);
-        } else {
-            Log.i(TAG, "Got a new result: " + resultId);
-
         }
         QueryPreferences.setLastResultId(this, resultId);
     }

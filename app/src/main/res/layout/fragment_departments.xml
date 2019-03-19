@@ -53,7 +53,8 @@
         android:paddingRight="96dp"
         android:visibility="invisible"
         app:fabSize="mini"
-        app:srcCompat="@mipmap/action_add"/>
+        app:srcCompat="@mipmap/action_add"
+        android:layout_alignParentRight="false"/>
 
 
 </RelativeLayout>

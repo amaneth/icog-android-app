@@ -2,15 +2,21 @@
 
 buildscript {
     repositories {
-        jcenter()
+
         maven{
             url 'https://maven.google.com'
 
         }
 
+
+
+
         maven { url 'https://maven.fabric.io/public' }
+        jcenter()
+
     }
     dependencies {
+
         classpath 'com.android.tools.build:gradle:2.3.3'
             classpath 'com.google.gms:google-services:4.2.0'
             classpath 'com.google.firebase:firebase-plugins:1.0.4'
@@ -26,16 +32,18 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+
         mavenCentral();
         maven {
             url "https://maven.google.com"
         }
 
-    }
-    repositories {
+
         maven { url 'https://maven.fabric.io/public' }
+        jcenter()
+
     }
+
 }
 
 task clean(type: Delete) {

@@ -1,6 +1,9 @@
 package com.example.amankassahun;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,27 +14,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
-import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import java.util.HashSet;
 import java.util.List;
@@ -48,22 +47,86 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     private String current_user_id;
 
-    private Button Hiruy;
-    private boolean fixed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_home);
+        checkPlayServices(HomeActivity.this);
+        switch(GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this)){
+            case ConnectionResult.SERVICE_MISSING:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.SERVICE_MISSING,0).show();
+                        break;
+            case ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED,0).show();
+                break;
+            case ConnectionResult.SERVICE_DISABLED:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.SERVICE_DISABLED,0).show();
+                break;
+            case ConnectionResult.API_UNAVAILABLE:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.API_UNAVAILABLE,0).show();
+                break;
+            case ConnectionResult.API_VERSION_UPDATE_REQUIRED:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.API_VERSION_UPDATE_REQUIRED,0).show();
+                break;
+            case ConnectionResult.CANCELED:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.CANCELED,0).show();
+                break;
+            case ConnectionResult.SIGN_IN_FAILED:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.SIGN_IN_REQUIRED,0).show();
+                break;
+            case ConnectionResult.SIGN_IN_REQUIRED:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.SIGN_IN_REQUIRED,0).show();
+                break;
+            case ConnectionResult.NETWORK_ERROR:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.NETWORK_ERROR,0).show();
+                break;
+            case ConnectionResult.SERVICE_INVALID:
+                GoogleApiAvailability.getInstance().getErrorDialog(this,ConnectionResult.SERVICE_INVALID,0).show();
+                break;
+
+        }
+        firebaseFirestore=FirebaseFirestore.getInstance();
         mAuth= FirebaseAuth.getInstance();
         FirebaseUser firebaseuser= FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("fireb",""+firebaseuser);
         if(firebaseuser==null&&mAuth!=null)
         {
             mAuth.signInWithEmailAndPassword("icog@gmail.com","password");
 
 
         }
+        /*GoogleApiAvailability.getInstance().makeGooglePlayServicesAvailable(this)
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            try {
+                                int ps= getPackageManager().getPackageInfo(GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE,0).versionCode;
+                                Toast.makeText(HomeActivity.this,"PS OK!"+ps+","+ps/1000000,Toast.LENGTH_LONG).show();
+                            } catch (PackageManager.NameNotFoundException e) {
+                                e.printStackTrace();
+                            }
+
+                            mAuth= FirebaseAuth.getInstance();
+                            FirebaseUser firebaseuser= FirebaseAuth.getInstance().getCurrentUser();
+                            if(firebaseuser==null&&mAuth!=null)
+                            {
+                                mAuth.signInWithEmailAndPassword("icog@gmail.com","password");
+
+
+                            }
+                        }else{
+                            try {
+                                Toast.makeText(HomeActivity.this,"PS  Not OK!"+getPackageManager().getPackageInfo(GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE,0).versionCode,Toast.LENGTH_LONG).show();
+                            } catch (PackageManager.NameNotFoundException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+                });
+*/
 
        /* Button crashButton= new Button(this);
         crashButton.setText("Crash!");
@@ -76,36 +139,15 @@ public class HomeActivity extends AppCompatActivity {
         addContentView(crashButton,new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT
         ));*/
-       Hiruy=findViewById(R.id.hiruy);
         mToolbar=findViewById(R.id.front_toolbar);
         frontBottomNav= findViewById(R.id.front_bottom_nav);
         mNavigationView= findViewById(R.id.nav_viewy);
-        firebaseFirestore=FirebaseFirestore.getInstance();
+
         mAuth=FirebaseAuth.getInstance();
         setSupportActionBar(mToolbar);
         replaceFragment(new HomeFragment(),"Home");
-        if(QueryPreferences.getHiruy(HomeActivity.this)){
-            Hiruy.setText("what was before fixed?");
-        }else{
-            Hiruy.setText("return to After fixed");
-        }
-        Hiruy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(QueryPreferences.getHiruy(HomeActivity.this)){
 
-                    Toast.makeText(HomeActivity.this,"it will crash on clicking buttons",Toast.LENGTH_SHORT).show();
 
-                    QueryPreferences.setHiruy(HomeActivity.this,false);
-                    Hiruy.setText("return to After fixed");
-                    }
-                else {
-                    Hiruy.setText("what was before fixed?");
-                    Toast.makeText(HomeActivity.this,"no more crashes",Toast.LENGTH_SHORT).show();
-                    QueryPreferences.setHiruy(HomeActivity.this,true);
-                }
-            }
-        });
         if(mAuth.getCurrentUser()!=null){
         current_user_id= mAuth.getCurrentUser().getUid();
         firebaseFirestore.collection("Users").document(current_user_id)
@@ -237,6 +279,10 @@ public class HomeActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         Exit();
                         return true;
+                    case R.id.action_competee:
+                        drawerLayout.closeDrawers();
+                        startActivity(new Intent(HomeActivity.this,SolvitCompetationActivity.class));
+                        return true;
                     default:
                         return false;
                 }
@@ -260,9 +306,22 @@ public class HomeActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Log.d("fireb",""+QueryPreferences.getDept(HomeActivity.this));
     }
-
+    public static boolean checkPlayServices(Context context) {
+        final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int resultCode = api.isGooglePlayServicesAvailable(context);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (api.isUserResolvableError(resultCode))
+                api.getErrorDialog(((Activity) context), resultCode, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            else {
+                Toast.makeText(context, "This device is not supported.", Toast.LENGTH_LONG).show();
+                ((Activity) context).finish();
+            }
+            return false;
+        }
+        return true;
+    }
     private void replaceFragment(Fragment fragment, String title){
         FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.front_container,fragment);

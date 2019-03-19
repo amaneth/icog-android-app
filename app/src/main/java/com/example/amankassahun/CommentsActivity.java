@@ -22,6 +22,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class CommentsActivity extends AppCompatActivity {
         comment_list.setHasFixedSize(true);
         comment_list.setLayoutManager(new LinearLayoutManager(this));
         comment_list.setAdapter(commentsRecyclerAdapter);
-        firebaseFirestore.collection("Posts/"+blog_post_id+"/Comments").addSnapshotListener(CommentsActivity.this,new EventListener<QuerySnapshot>() {
+        firebaseFirestore.collection("Posts/"+blog_post_id+"/Comments").orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener(CommentsActivity.this,new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
 

@@ -10,14 +10,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,15 +27,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -59,9 +54,8 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     public Context context;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
-    private String authorityBull;
     private String current_user_id;
-    private String departmen;
+    public static boolean DrAbiyAhmed=true;
     public BlogRecyclerAdapter(List<BlogPost> blog_list,List<User> user_list){
         this.blog_list=blog_list;
         this.user_list=user_list;
@@ -95,104 +89,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
                 cm.getActiveNetworkInfo().isConnected();
         return isNetworkConnected;
     }
-    public void showAddAdminDialog(final String authority, final String person, final String user_id) {
-        View checkBoxView=null;
-        authorityBull=authority;
-            if(authority.equals("main admin")) {
-                 checkBoxView = View.inflate(context, R.layout.activity_admin_choice, null);
-                RadioButton admincheckBox = checkBoxView.findViewById(R.id.admin_radio_btn);
-                RadioButton acc = checkBoxView.findViewById(R.id.acc_admin);
-                RadioButton makers = checkBoxView.findViewById(R.id.makers_admin);
-                RadioButton solveIt = checkBoxView.findViewById(R.id.solveit_admin);
-                RadioButton die = checkBoxView.findViewById(R.id.die_admin);
 
-                admincheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                        authorityBull="main admin";// Save to shared preferences
-                    }
-                });
-                acc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                        authorityBull="acc admin";// Save to shared preferences
-                    }
-                });
-                makers.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                        authorityBull="makers admin"; // Save to shared preferences
-                    }
-                });
-                solveIt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                        authorityBull="solvit admin";// Save to shared preferences
-                    }
-                });
-                die.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                        authorityBull="die admin";// Save to shared preferences
-                    }
-                });
-            }
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Do you want to make "+person+" "+authority)
-                .setView(checkBoxView)
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        final DocumentReference docRef=firebaseFirestore.collection("Users").document(user_id);
-                        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    if(task.getResult().exists()){
-                                        Map<String,Object> updates= new HashMap<>();
-
-                                            updates.put("authority",authorityBull);
-
-
-                                        docRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-
-                                                Toast.makeText(context,person+" is "+authorityBull+" admin now",Toast.LENGTH_LONG).show();
-                                                notifyDataSetChanged();
-                                            }
-                                        });
-
-
-
-
-                                    }
-                                }
-                                else{
-                                    String error= task.getException().getMessage();
-                                    Toast.makeText(context,"ERROR: "+error,Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-                        });                         }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                }).show();
-
-    }
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.setIsRecyclable(false);
@@ -229,6 +126,7 @@ if(date!=null){
 
         //Get Likes
         firebaseFirestore.collection("Posts/"+blogPostId+"/Likes").addSnapshotListener((Activity) context,new EventListener<QuerySnapshot>() {
+
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                if(documentSnapshots!=null){
@@ -326,6 +224,8 @@ if(date!=null){
                 ((Activity) context).startActivityForResult(commentIntent,1);
             }
         });
+        Log.d("abay",DrAbiyAhmed+"");
+        if(DrAbiyAhmed){
 holder.blogDeleteBtn.setOnLongClickListener(new View.OnLongClickListener() {
     @Override
     public boolean onLongClick(View v) {
@@ -337,11 +237,12 @@ holder.blogDeleteBtn.setOnLongClickListener(new View.OnLongClickListener() {
                         firebaseFirestore.collection(departmentof).document(blogPostId).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                blog_list.remove(position);
-                                user_list.remove(position);
-                                notifyDataSetChanged();
+                               blog_list.remove(position);
+                               user_list.remove(position);
+                               notifyDataSetChanged();
                             }
                         });
+
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -351,7 +252,7 @@ holder.blogDeleteBtn.setOnLongClickListener(new View.OnLongClickListener() {
                 }).show();
         return true;
     }
-});
+});}
 
         holder.profileImage.setOnClickListener(new View.OnClickListener() {
             @Override

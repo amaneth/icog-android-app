@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
-import android.util.Log;
 
 /**
  * Created by Aman on 5/23/2018.
@@ -22,12 +20,10 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
                 if (activeNetwork.isConnected() && !isUpdated) {
                     if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
                         // connected to wifi
-                        Log.d("aziza", "disconcoNnectedwfi");
                         Intent servicIntent= BlogService.newIntent(context);
                         context.getApplicationContext().startService(servicIntent);
                     } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
                         // connected to the mobile provider's data plan
-                        Log.d("aziza", "disconcoNnectedMob");
                         Intent servicIntent= BlogService.newIntent(context);
                         context.getApplicationContext().startService(servicIntent);
                     }

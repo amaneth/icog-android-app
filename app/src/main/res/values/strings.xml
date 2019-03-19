@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">iCog app</string>
+    <string name="app_name">iCog</string>
     <string name="search">Search</string>
     <string name="clear_search">Refresh</string>
-    <string name="open_notifications">Open notification</string>
-    <string name="close_notifications">Close notification</string>
+    <string name="open_notifications">Enable notification</string>
+    <string name="close_notifications">Disable notification</string>
     <string name="new_news_title">New PhotoGallery Pictures</string>
     <string name="new_news_text">You have new pictures in PhotoGallery.</string>
     <string name="retry_text">CONNECTION FAILED!</string>
@@ -28,7 +28,7 @@
     <string name="setup_image_hintt">Your name...</string>
     <string name="setup_name_btn_txt">Save account</string>
     <string name="post_desc_hint"/>
-    <string name="post_desc_hintt">Add Description</string>
+    <string name="post_desc_hintt">Write post here...</string>
     <string name="new_post_btn_hint">Post</string>
     <string name="bottom_home_txt">Home</string>
     <string name="bottom_notification_txt">Notification</string>
@@ -117,5 +117,6 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="compete">iCog incorporated some of its previous project ideas and resources and came up with SOLVE IT an innovation completion in selected cities of the country; capitalizing on the idea that the involvement of regional cities is crucial if one wants to create a sustainable local tech market. With such spirit, SOLVE IT was proposed to the US embassy in Addis Ababa. The first round of SOLVE IT, as a result, was conducted in collaboration with the US embassy (From November 30, 2017- September 25, 2018).  The project sparked and created awareness about the impact of pro-poor technologies via direct seminars, media coverage, marketing collateral. And finally, it delivered a grand finale where the top three projects were selected in the national competition by mobilizing the top three projects, from each city, represented by one or two team members, for a week-long boot camp training before the national competition. In the boot camp the participants got the chance of to visit Ethiopian airlines, ENSA and other technology places. In the bootcamp the participants got a chance to meet and show their project to investors at the end they presented their respective pitch for competition judges.</string>
+    <string name="compete">iCog incorporated some of its previous project ideas and resources and came up with SOLVE IT an innovation completion in selected cities of the country; capitalizing on the idea that the involvement of regional cities is crucial if one wants to create a sustainable local tech market. With such spirit, SOLVE IT was proposed to the US embassy in Addis Ababa. The first round of SOLVE IT, as a result, was conducted in collaboration with the US embassy (From November 30, 2017- September 25, 2018).  \n\nThe project sparked and created awareness about the impact of pro-poor technologies via direct seminars, media coverage, marketing collateral. And finally, it delivered a grand finale where the top three projects were selected in the national competition by mobilizing the top three projects, from each city, represented by one or two team members, for a week-long boot camp training before the national competition. In the boot camp the participants got the chance of to visit Ethiopian airlines, ENSA and other technology places. In the bootcamp the participants got a chance to meet and show their project to investors at the end they presented their respective pitch for competition judges.</string>
+    <string name="register_for">Register For</string>
 </resources>

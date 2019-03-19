@@ -1,6 +1,4 @@
 package com.example.amankassahun;
-
-import android.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,18 +12,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,18 +38,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 
 import id.zelory.compressor.Compressor;
 
 public class NewPostActivity extends AppCompatActivity {
-private static final int MAX_LENGTH= 100;
     private Toolbar newPostToolbar;
     private ImageView newPostImage;
     private EditText newPostDesc;
     private Button newPostBtn;
-    private boolean advertisment;
     private Uri postImageUri=null;
     private Uri imageUri=null;
     private ProgressBar newPostProgress;
@@ -69,8 +58,6 @@ private static final int MAX_LENGTH= 100;
     private static String DEPARTMENTPOST="departmentforpost";
     private static String ITEMPOSITION="item_position";
 
-    String[] privacies={"iCoggers only","public","Makers only","ACC only","SolveIt only","Design in Ethiopia only"};
-    String privacy;
     public static Intent newIntentPost(Context packageContext, String department,int item){
         Intent intent = new Intent(packageContext,NewPostActivity.class);
         intent.putExtra(DEPARTMENTPOST,department);
@@ -91,11 +78,12 @@ private static final int MAX_LENGTH= 100;
         current_user_id=firebaseAuth.getCurrentUser().getUid();
         newPostToolbar=findViewById(R.id.new_post_toolbar);
         setSupportActionBar(newPostToolbar);
-        getSupportActionBar().setTitle("Add New Post");
+        getSupportActionBar().setTitle("New Post");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         newPostImage= (ImageView) findViewById(R.id.new_post_image);
         newPostDesc= (EditText) findViewById(R.id.new_post_desc);
         newPostBtn= (Button) findViewById(R.id.post_btn);
+        newPostBtn.setEnabled(true);
 
         newPostProgress =(ProgressBar) findViewById(R.id.new_post_progress);
 
@@ -138,6 +126,7 @@ private static final int MAX_LENGTH= 100;
                 final String desc= newPostDesc.getText().toString();
                 if(postImageUri!=null){
                     newPostProgress.setVisibility(View.VISIBLE);
+                    newPostBtn.setEnabled(false);
 
                     if(postImageUri!=null){
                     File newImagefile= new File(postImageUri.getPath());
@@ -154,16 +143,13 @@ private static final int MAX_LENGTH= 100;
                     ByteArrayOutputStream out= new ByteArrayOutputStream();
                     compressedImageFile.compress(Bitmap.CompressFormat.JPEG,0,out);
                     imageUri=getImageUri(getApplicationContext(),compressedImageFile);
-                    StorageReference filePath= storageReference.child("post_images").child(randomName+".jpg");
+                    final StorageReference filePath= storageReference.child("post_images").child(randomName+".jpg");
                      filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                          @Override
                          public void onComplete(@NonNull final Task<UploadTask.TaskSnapshot> task) {
                              final String downloadUrl= task.getResult().getDownloadUrl().toString();
                              if(task.isSuccessful()){
 
-                                 ByteArrayOutputStream baos= new ByteArrayOutputStream();
-                                 Log.d("newpost","compressing finished");
-                                 byte[] thumbData= baos.toByteArray();
 
 
                                          Map<String,Object> postMap= new HashMap<>();
@@ -185,12 +171,14 @@ private static final int MAX_LENGTH= 100;
 
                                                  }
                                                  newPostProgress.setVisibility(View.INVISIBLE);
+                                                 newPostBtn.setEnabled(true);
                                              }
                                          });
 
 
                              }else{
                                  newPostProgress.setVisibility(View.INVISIBLE);
+                                 newPostBtn.setEnabled(true);
                              }
                          }
                      }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -223,6 +211,7 @@ private static final int MAX_LENGTH= 100;
 
                             }
                             newPostProgress.setVisibility(View.INVISIBLE);
+                            newPostBtn.setEnabled(true);
                         }
                     });}
 
@@ -230,7 +219,6 @@ private static final int MAX_LENGTH= 100;
         });
     }
     private Uri getImageUri(Context inContext, Bitmap selectedImage) {
-        ByteArrayOutputStream bytes= new ByteArrayOutputStream();
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(),selectedImage,"Title ",null);
 
         if(path!=null)
@@ -255,16 +243,5 @@ private static final int MAX_LENGTH= 100;
             }
         }
     }
-    public static String random(){
-        Random generator = new Random();
-        StringBuilder randomStringBuilder= new StringBuilder();
-        int randomLength = generator.nextInt(MAX_LENGTH);
-        char tempChar;
-        for (int i=0;i <randomLength;i++){
-            tempChar=(char) (generator.nextInt(96)+32);
-            randomStringBuilder.append(tempChar);
-        }
-        return randomStringBuilder.toString();
 
-    }
 }

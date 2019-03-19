@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     private DocumentReference docRef;
     private FirebaseFirestore firebaseFirestore;
     private List<Members> members_list;
+    private List<String> authority;
     private static String DEPARTMENTA="departmentalogin";
     private static String ITEMIDA="ddepartmentaposition";
     public static Intent newIntent(Context packageContext, String department, int itemId){
@@ -128,11 +129,14 @@ public class LoginActivity extends AppCompatActivity {
                 loginEmail = loginEmailText.getText().toString();
                 String loginPass = loginPassText.getText().toString();
                 if (!TextUtils.isEmpty(loginEmail) && !TextUtils.isEmpty(loginPass)) {
+                    //Toast.makeText(LoginActivity.this,"Goona start",Toast.LENGTH_SHORT).show();
                     loginProgress.setVisibility(View.VISIBLE);
                     mAuth.signInWithEmailAndPassword(loginEmail, loginPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                //Toast.makeText(LoginActivity.this,"success",Toast.LENGTH_SHORT).show();
+
                                 String current_user_id= mAuth.getCurrentUser().getUid();
                                 if(mAuth.getCurrentUser().isEmailVerified()){
                                  docRef=firebaseFirestore.collection("Users").document(current_user_id);
@@ -141,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
                                             if(task.getResult().exists()){
-                                                List<String> authority;
+
                                                 authority= (List<String>) task.getResult().get("authority");
                                                  deppt= task.getResult().getString("department");
                                                 Set<String> set= new HashSet<>();
@@ -206,12 +210,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
     }
     private void SendToMain(){
-        if(department!=null){
+        if(authority!=null){
         Intent mainintent= DepartmentsActivity.newIntent(LoginActivity.this,department,getIntent().getIntExtra(ITEMIDA,0),loginEmail);
         startActivity(mainintent);
         finish();}
         else{
-            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+            startActivity(SetupActivity.newIntent(LoginActivity.this,null,loginEmail,null));
             finish();
         }
     }
