@@ -31,9 +31,11 @@ This android application was developed as a social media tool for the iCog Labs 
 ### Test Results
 The following is a screenshot taken from the app. 
 
-![caption](images/img0.jpg)
+<img src="images/img0.jpg" alt="drawing" width="400"/>
 
-![caption](images/img1.jpg)
+<img src="images/img1.jpg" alt="drawing" width="400"/>
 
-![caption](images/img2.jpg)
-![caption](images/img3.jpg)
+<img src="images/img2.jpg" alt="drawing" width="400"/>
+
+<img src="images/img3.jpg" alt="drawing" width="400"/>
+
