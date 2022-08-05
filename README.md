@@ -1,6 +1,6 @@
 # iCog Android App
 
-This android application was developed as a social media tool for the iCog Labs company. Its main objective was to open a line of contact amongst the employees of the organization. The company has five programs. For each program, a group had been created in the app where users could make posts, like and comment posts. Each group had an administrator with the authority to manage the group. Additionally, the app was linked to the SolveIt website, making it simpler to register for the the SolveIt competition. The app also pulls news stories from the company's website  so that users can easily access blogs from the company.
+This android application was developed as a social media tool for the [iCog Labs](https://icog-labs.com/) company. Its main objective was to promote social interaction amongst the employees of the organization. The company has five programs. For each program, a group had been created in the app where users could make posts, like and comment posts. Each group had an administrator with the authority to manage the group. Additionally, the app was linked to the SolveIt website, making it simpler to register for the the SolveIt competition. The app also pulls news stories from the company's website  so that users can easily access blogs from the company. You can download the apk [here](https://drive.google.com/file/d/1JlnJi6vZAmMckVu8xS-lEzZn6W94l8-7/view?usp=sharing).
 
 ## Dependencies
 ### Android
